@@ -1,2 +1,3 @@
 ---
 vault_secrets::update_trust_cmd: 'update-ca-certificates'
+vault_secrets::certs_dir: '/etc/ssl/vault-secrets'

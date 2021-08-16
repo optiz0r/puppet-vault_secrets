@@ -1,2 +1,3 @@
 ---
 vault_secrets::update_trust_cmd: 'update-ca-trust'
+vault_secrets::certs_dir: '/etc/pki/vault-secrets'

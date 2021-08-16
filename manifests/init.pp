@@ -19,6 +19,7 @@
 class vault_secrets (
   String $vault_uri,
   String $auth_path,
+  String $certs_dir,
   Integer[1, 30] $days_before_renewal = 3,
   Hash $cert_data                     = {},
 ) {
@@ -35,6 +36,15 @@ class vault_secrets (
   $days_remaining = $x ? {
     undef   => 0,
     default => $x,
+  }
+
+  # Create a dedicated directory where certs deployed by this module will reside
+  file {
+    $certs_dir:
+      ensure => directory,
+      owner  => 'root',
+      group  => 'root',
+      mode   => '0644';
   }
 
   if !$valid or $days_remaining < $days_before_renewal {
@@ -89,4 +99,3 @@ class vault_secrets (
     refreshonly => true,
   }
 }
-

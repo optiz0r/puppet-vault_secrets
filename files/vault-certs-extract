@@ -1,0 +1,13 @@
+#!/opt/puppetlabs/puppet/bin/ruby
+
+require 'json'
+
+info_file = ARGV[0]
+cert_file = ARGV[1]
+key_file = ARGV[2]
+chain_file = ARGV[3]
+
+cert_info = JSON.parse(File.read(info_file))
+File.write(cert_file, cert_info['certificate'], perm: 0644)
+File.write(chain_file, cert_info['ca_chain'].join("\n"), perm: 0644)
+File.write(key_file, cert_info['private_key'], perm: 0600)
